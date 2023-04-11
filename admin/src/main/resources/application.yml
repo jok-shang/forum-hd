@@ -1,0 +1,33 @@
+oss:
+  qiniu:
+    url: http://image.szj.icu
+    accessKey: X46yk_LGEtRxth8E5ORMxkX8HEzNSL1wMpXY_liq
+    secretKey: HHzNcNH5XWZ3ZnALNBu2vJhQYrEL-RFVuvwW7qxx
+    bucketName: ssimages
+spring:
+  redis:
+    host: 47.107.225.176 #redis上服务器需要改
+    port: 6379
+    database: 0
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    url: jdbc:mysql://localhost:3306/forum?serverTimezone=UTC
+    #    username: root
+    #    password: 1234
+    username: success
+    password: 1234
+    url: jdbc:mysql://47.107.225.176:3306/success?serverTimezone=UTC
+server:
+  port: 8080
+
+
+#mail:
+#  host: smtp.exmail.qq.com
+#  default-encoding: utf-8
+#  port: 465
+#  properties:
+#    mail:
+#      smtp:
+#        socketFactory:
+#          class: javax.net.ssl.SSLSocketFactory
