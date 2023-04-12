@@ -3,6 +3,7 @@ package com.forum.user.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.forum.model.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @auther 尚智江
@@ -10,4 +11,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
+//    User selectAllUser(String email);
+//    Integer selectUsername(@Param("username") String username);
 }

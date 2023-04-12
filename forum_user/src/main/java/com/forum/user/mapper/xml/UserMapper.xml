@@ -3,4 +3,23 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.forum.user.mapper.UserMapper">
+    <resultMap type="com.forum.model.pojo.User" id="UserinfoResult">
+        <result property="uid"    column="uid"    />
+        <result property="username"    column="username"    />
+        <result property="password"    column="password"    />
+        <result property="email"    column="email"    />
+        <result property="createTime"    column="createtime"    />
+        <result property="headImage"    column="headimage"    />
+        <result property="isDelete"    column="isdelete"    />
+        <result property="salt"    column="salt"/>
+    </resultMap>
+
+    <!--  查询用户名是否存在  -->
+<!--    <select id="selectUsername" resultType="java.lang.Integer">-->
+<!--        select username from userinfo where username = #{username}-->
+<!--    </select>-->
+<!--    &lt;!&ndash; 通过Email查询用户所有信息 &ndash;&gt;-->
+<!--    <select id="selectAllUser" resultMap="UserinfoResult" parameterType="com.forum.model.pojo.User">-->
+<!--        SELECT * from userinfo WHERE email = #{email}-->
+<!--    </select>-->
 </mapper>

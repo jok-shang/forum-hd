@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.Date;
 
@@ -14,6 +15,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @TableName("userinfo") // 表名称
 public class User {
 
@@ -54,10 +56,5 @@ public class User {
     @TableField(exist = false)
     private String token;
 
-    public User(Integer uid, String username, String email, String headImage) {
-        this.uid = uid;
-        this.username = username;
-        this.email = email;
-        this.headImage = headImage;
-    }
+
 }

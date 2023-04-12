@@ -24,6 +24,7 @@
         <module>admin</module>
         <module>forum-study</module>
         <module>forum_user</module>
+        <module>forum-wenzhang</module>
     </modules>
 
     <!--  统一管理依赖版本  -->

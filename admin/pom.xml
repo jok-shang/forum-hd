@@ -38,7 +38,11 @@
             <artifactId>forum_user</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.example</groupId>
+            <artifactId>forum-wenzhang</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>

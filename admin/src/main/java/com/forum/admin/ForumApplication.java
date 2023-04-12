@@ -10,7 +10,8 @@ import org.springframework.context.annotation.ComponentScan;
  * @Date 2023/4/3 21:37
  */
 @SpringBootApplication
-@MapperScan({"com.forum.admin.mapper","com.forum.study.mapper","com.forum.user.mapper"})
+@MapperScan({"com.forum.admin.mapper","com.forum.study.mapper","com.forum.user.mapper",
+        "com.forum.wenzhang.mapper"})
 @ComponentScan({"com.forum"})  // 扫描其他子模块
 public class ForumApplication {
     public static void main(String[] args) {

@@ -1,56 +1,53 @@
 package com.forum.model.pojo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+import jdk.nashorn.internal.runtime.logging.Logger;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import java.util.Date;
 
 /**
  * @auther 尚智江
  * @Date 2023/4/4 10:35
  */
-@TableName("wtest")
+@TableName("wenzhang")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class WenZhang  {
-    @TableId(value = "id",type = IdType.AUTO)
-    private Integer id;
+    @TableId(value = "tid",type = IdType.AUTO)
+    private Integer tid;
+
+    @TableField("uid")
+    private Integer uid;
+
+    @TableField("sid")
+    private Integer sid;
+
     @TableField("biaoti")
     private String biaoTi;
+
     @TableField("neirong")
     private String neiRong;
 
-    public WenZhang() {
-    }
+    @TableField(value = "createtime",fill = FieldFill.INSERT)
+    private Date createTime;
 
-    public Integer getId() {
-        return id;
-    }
+    @TableField(value = "updatetime" ,fill = FieldFill.UPDATE)
+    private Date updateTime;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    @TableLogic(value = "0",delval = "1")
+    @TableField(value = "isdelete",fill = FieldFill.INSERT)
+    private Integer isDelete;
 
-    public String getBiaoTi() {
-        return biaoTi;
-    }
+    @TableField("tstart")
+    private Integer tStart;
 
-    public void setBiaoTi(String biaoTi) {
-        this.biaoTi = biaoTi;
-    }
+    @TableField("tshou")
+    private Integer tShou;
 
-    public String getNeiRong() {
-        return neiRong;
-    }
-
-    public void setNerRong(String neiRong) {
-        this.neiRong = neiRong;
-    }
-
-    public WenZhang(Integer id, String biaoTi, String neiRong) {
-        this.id = id;
-        this.biaoTi = biaoTi;
-        this.neiRong = neiRong;
-    }
 }

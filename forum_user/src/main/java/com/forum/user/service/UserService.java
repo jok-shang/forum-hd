@@ -18,4 +18,7 @@ public interface UserService extends IService<User> {
      */
     public String getRandomCount();
 
+    boolean fsYzm(User user);
+//    boolean selectUsername(String username);
+
 }

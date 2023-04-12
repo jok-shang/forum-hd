@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserTokenVO {
+    private Integer uid;
     /** 用户名 */
     private String username;
 
