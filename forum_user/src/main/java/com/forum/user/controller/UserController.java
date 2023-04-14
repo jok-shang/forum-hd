@@ -6,12 +6,14 @@ import com.forum.common.result.Result;
 import com.forum.common.result.ResultCodeEnum;
 import com.forum.model.pojo.User;
 import com.forum.model.vo.UserTokenVO;
+import com.forum.model.vo.UserUPPasswordVO;
 import com.forum.model.vo.UserVO;
 import com.forum.user.mapper.UserMapper;
 import com.forum.user.service.UserService;
 import com.forum.util.MD5Utils.MD5Util;
 import com.forum.util.jwtUtils.JwtUtil;
 import com.forum.util.utils.EmailUtils;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.*;
@@ -159,5 +161,36 @@ public class UserController {
         return Result.build(pdToken,ResultCodeEnum.LOGIN_AURH);
     }
 
+    /**
+     * 修改密码1  向用户的邮箱发送验证码
+     * @param email  邮箱
+     * @return Result
+     */
+    @GetMapping("/updatePassword1")
+    public Result updatePassword1(@Param("email") String email){
+        boolean b = userService.fsYzmUP(email);
+        return b ? Result.ok().message("验证码发送成功") : Result.fail().message("验证码发送异常,请检查邮箱信息");
+    }
 
+    /**
+     * 修改用户密码提交表单
+     * @param userUPPasswordVO
+     * @return
+     */
+    @PostMapping("/updatePasswoerd2")
+    public Result updatePassword2(@RequestBody UserUPPasswordVO userUPPasswordVO){
+        ValueOperations<String, String> operations = redisTemplate.opsForValue();
+        String yzm = operations.get(userUPPasswordVO.getEmail());
+        System.out.println(userUPPasswordVO.getEmail()+"////"+yzm);
+        if (yzm.equals(userUPPasswordVO.getYzm())){
+            System.out.println(yzm+"===="+userUPPasswordVO.getYzm());
+            boolean b = userService.updatePassword(userUPPasswordVO);
+            if (b){
+                return Result.ok().message("修改成功");
+            }
+            return Result.fail().message("修改密码异常");
+        }
+        System.out.println(yzm.equals(userUPPasswordVO.getEmail()));
+        return Result.fail().message("验证码错误");
+    }
 }

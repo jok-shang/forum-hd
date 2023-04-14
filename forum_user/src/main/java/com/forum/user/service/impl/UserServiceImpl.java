@@ -1,8 +1,10 @@
 package com.forum.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.forum.common.result.Result;
+import com.forum.model.vo.UserUPPasswordVO;
 import com.forum.user.mapper.UserMapper;
 import com.forum.user.service.UserService;
 import com.forum.model.pojo.User;
@@ -17,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.MessagingException;
 import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -61,6 +64,57 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
         operations.set(user.getEmail(),randomCount, 3, TimeUnit.MINUTES);
         return true;
     }
+
+    /**
+     * 修改密码发送验证码
+     * @param email 用户邮箱
+     * @return Result
+     */
+    @Override
+    public boolean fsYzmUP(String email) {
+        //TODO 生成6位随机整数
+        String randomCount = this.getRandomCount();
+        //TODO 向用户邮箱发送验证码
+        EmailUtils emailUtils = new EmailUtils();
+        try {
+            emailUtils.toEmail(email, "修改学习论坛平台密码" ,"您本次修改账号密码的验证码为 : "+ randomCount);
+        } catch (MessagingException e) {
+            return false;
+        }
+        ValueOperations<String, String> operations = redisTemplate.opsForValue();
+//        TimeUnit.MINUTES
+        operations.set(email,randomCount, 3, TimeUnit.MINUTES);
+        return true;
+    }
+
+    /**
+     * 修改密码
+     * @param userUPPasswordVO 修改密码的VO类
+     * @return Result
+     */
+    @Override
+    public boolean updatePassword(UserUPPasswordVO userUPPasswordVO) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("email",userUPPasswordVO.getEmail()).eq("username",userUPPasswordVO.getUsername());
+        User user = userMapper.selectOne(queryWrapper);
+        System.out.println("查询出来的用户信息"+user);
+        if (user != null){
+            String salt = UUID.randomUUID().toString().toUpperCase();
+            MD5Util md5Util = new MD5Util();
+            String newPassword = md5Util.getMD5Password(userUPPasswordVO.getPassword(), salt);
+            UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
+            updateWrapper
+                    .eq("username",userUPPasswordVO.getUsername());
+            updateWrapper.set("salt",salt);
+            updateWrapper.set("password",newPassword);
+            int update = baseMapper.update(user,updateWrapper);
+            System.out.println("修改影响行数"+update);
+            return update > 0;
+        }
+        return false;
+    }
+
+//    public Result updatePassword()
 
 //    @Override
 //    public boolean selectUsername(String username) {
