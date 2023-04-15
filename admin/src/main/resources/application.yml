@@ -20,6 +20,10 @@ spring:
     url: jdbc:mysql://47.107.225.176:3306/success?serverTimezone=UTC
 server:
   port: 8808
+  #tomcat:
+  #max-http-post-size: -1
+  #参数过长
+  max-http-header-size: 4048576
 
 #mail:
 #  host: smtp.exmail.qq.com
