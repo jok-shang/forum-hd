@@ -36,9 +36,34 @@ public class WenZhangController {
         return Result.fail().message("发布失败");
     }
 
+    /**
+     * 获取文章分类板块
+     * @return
+     */
     @GetMapping("/getBanKuai")
     public Result getBanKuai(){
         List<Section> list = sectionService.list();
         return Result.ok(list);
+    }
+
+    /**
+     * 获取文章列表(所有)
+     * @return
+     */
+    @GetMapping("/WZList")
+    public Result getWenZhangList(){
+        List<WenZhang> list = wenZhangService.list();
+        return Result.ok(list);
+    }
+
+    /**
+     * 根据id获取文章
+     * @param id
+     * @return
+     */
+    @GetMapping("/GetWZById/{id}")
+    public Result getWenZhangById(@PathVariable("id") Integer id){
+        WenZhang byId = wenZhangService.getById(id);
+        return Result.ok(byId);
     }
 }
