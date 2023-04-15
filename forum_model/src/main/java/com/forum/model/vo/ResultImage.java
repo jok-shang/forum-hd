@@ -12,12 +12,11 @@ import java.io.Serializable;
  * @Date 2023/4/15 14:29
  */
 @Data
-@AllArgsConstructor
+
 @NoArgsConstructor
 public class ResultImage<T> implements Serializable {
 
     private Integer errno;
-    private String message;
     private T data;
 
     public ResultImage(Integer errno, T data) {
@@ -25,8 +24,4 @@ public class ResultImage<T> implements Serializable {
         this.data = data;
     }
 
-    public ResultImage(Integer errno, String message) {
-        this.errno = errno;
-        this.message = message;
-    }
 }

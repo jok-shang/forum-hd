@@ -59,7 +59,6 @@ public class UploadController {
                 ResultImage resultImage = new ResultImage(3,"上传失败");
                 return resultImage;
             }else {
-//                map.put("errno",0);
                 map.put("url",path);
                 ResultImage resultImage = new ResultImage(0,map);
                 return resultImage;
