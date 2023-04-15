@@ -115,19 +115,19 @@ public class UploadImageServiceImpl implements UploadImageService {
     }
 
 
-    /**
-     * 根据空间名、文件名删除文件
-     * @param bucketName 存储空间名字
-     * @param fileKey 文件名
-     * @return
-     */
-    @Override
-    public boolean removeFile(String bucketName, String fileKey) {
-        try {
-            bucketManager.delete(bucketName, fileKey);
-        } catch (QiniuException e) {
-            e.printStackTrace();
-        }
-        return true;
-    }
+//    /**
+//     * 根据空间名、文件名删除文件
+//     * @param bucketName 存储空间名字
+//     * @param fileKey 文件名
+//     * @return
+//     */
+//    @Override
+//    public boolean removeFile(String bucketName, String fileKey) {
+//        try {
+//            bucketManager.delete(bucketName, fileKey);
+//        } catch (QiniuException e) {
+//            e.printStackTrace();
+//        }
+//        return true;
+//    }
 }

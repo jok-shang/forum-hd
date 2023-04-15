@@ -16,5 +16,5 @@ public interface UploadImageService {
      */
     String uploadQNImg(MultipartFile file);
     public String getPrivateFile(String fileKey);
-    public boolean removeFile(String bucketName, String fileKey);
+//    public boolean removeFile(String bucketName, String fileKey);
     }
