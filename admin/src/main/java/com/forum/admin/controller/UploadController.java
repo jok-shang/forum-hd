@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @auther 尚智江
@@ -52,15 +53,16 @@ public class UploadController {
     }
 
     @PostMapping("/wzuploadImage")
-    public WangEditorVO WzUploadImage(@RequestParam("file") MultipartFile file) {
-        List<String> list = new ArrayList<>();
+    public WangEditorVO WzUploadImage(@RequestParam(value = "file",required = false) MultipartFile file) {
+        List<Map> list = new ArrayList<>();
         HashMap<String,Object> map = new HashMap<>();
         if (!file.isEmpty()){
             String path = uploadImageService.uploadQNImg(file);
             if (path.equals("失败")){
                 return WangEditorVO.error(3,"上传失败");
             }else {
-                list.add(path);
+                map.put("url",path);
+                list.add(map);
                 return WangEditorVO.success(list);
             }
         }
