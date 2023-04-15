@@ -19,7 +19,7 @@ spring:
     password: 1234
     url: jdbc:mysql://47.107.225.176:3306/success?serverTimezone=UTC
 server:
-  port: 8080
+  port: 8808
 
 #mail:
 #  host: smtp.exmail.qq.com

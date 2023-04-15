@@ -1,7 +1,7 @@
 package com.forum.model.pojo;
 
 import com.baomidou.mybatisplus.annotation.*;
-import jdk.nashorn.internal.runtime.logging.Logger;
+//import jdk.nashorn.internal.runtime.logging.Logger;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
