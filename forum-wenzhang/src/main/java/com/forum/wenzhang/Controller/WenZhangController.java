@@ -1,11 +1,15 @@
 package com.forum.wenzhang.Controller;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.forum.common.result.Result;
 import com.forum.model.pojo.Section;
 import com.forum.model.pojo.WenZhang;
 import com.forum.wenzhang.service.SectionService;
 import com.forum.wenzhang.service.WenZhangService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -65,5 +69,26 @@ public class WenZhangController {
     public Result getWenZhangById(@PathVariable("id") Integer id){
         WenZhang byId = wenZhangService.getById(id);
         return Result.ok(byId);
+    }
+
+    @PostMapping("findAllwzPage/{current}/{limit}")
+    public Result findAllPageWenZhang(@PathVariable Integer current,
+                                      @PathVariable Integer limit,
+                                      @RequestBody(required = false) WenZhang wenZhang){
+        // 创建page对象 ，传递当前页，每页记录
+        Page<WenZhang> page = new Page<>(current,limit);
+        // 构建条件
+        QueryWrapper<WenZhang> queryWrapper = new QueryWrapper<>();
+//        Integer bk = wenZhang.getSid();//按板块查询
+        String biaoti = wenZhang.getBiaoTi();// 按标题查询
+//        if(!StringUtils.isEmpty(bk)){
+//            queryWrapper.like("sid",wenZhang.getSid());
+//        }
+        if (!StringUtils.isEmpty(biaoti)){
+            queryWrapper.like("biaoti",wenZhang.getBiaoTi());
+        }
+        // 调用方法实现分页
+        Page<WenZhang> wz = wenZhangService.page(page,queryWrapper);
+        return Result.ok(wz);
     }
 }
